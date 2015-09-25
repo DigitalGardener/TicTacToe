@@ -6,8 +6,8 @@
     public class Game
     {
         /// <summary>
-        /// Indicates whether players can continue to play
+        /// Indicates the current state of play
         /// </summary>
-        public bool IsOver { get; } = false;
+        public GameStatus Status { get; private set; } = GameStatus.New;
     }
 }
