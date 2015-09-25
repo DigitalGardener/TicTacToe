@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Text;
 using System.Collections.Generic;
+using static System.Linq.Enumerable;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TicTacToe.Domain.Tests
@@ -65,11 +67,16 @@ namespace TicTacToe.Domain.Tests
             gameUnderTest = new Game();
         }
 
+        [TestMethod]
+        public void AtStartOfGameStatusIsNew()
+        {
+            Assert.IsTrue(gameUnderTest.Status == GameStatus.New);
+        }
 
         [TestMethod]
-        public void NewGameIsNotOver()
+        public void AtStartOfGameAllCellsAreUnmarked()
         {
-            Assert.IsFalse(gameUnderTest.IsOver);
+            Assert.IsTrue(gameUnderTest.CellStatuses.All(status => status == CellStatus.Unmarked));
         }
     }
 }
