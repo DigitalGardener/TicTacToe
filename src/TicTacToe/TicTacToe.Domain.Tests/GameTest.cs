@@ -1,14 +1,11 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using static System.Linq.Enumerable;
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TicTacToe.Domain.Tests
 {
     /// <summary>
-    /// Summary description for GameTest
+    /// Game instance tests
     /// </summary>
     [TestClass]
     public class GameTest
@@ -77,6 +74,56 @@ namespace TicTacToe.Domain.Tests
         public void AtStartOfGameAllCellsAreUnmarked()
         {
             Assert.IsTrue(gameUnderTest.CellStatuses.All(status => status == CellStatus.Unmarked));
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void IfAttemptIsMadeToMarkCellWithRowNumberLessThanMinimumThenExceptionIsThrown()
+        {
+            gameUnderTest.Play(Game.MIN_ROW_COLUMN - 1, Game.MIN_ROW_COLUMN, CellStatus.X);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void IfAttemptIsMadeToMarkCellWithRowNumberGreaterThanMaximumThenExceptionIsThrown()
+        {
+            gameUnderTest.Play(Game.MAX_ROW_COLUMN + 1, Game.MIN_ROW_COLUMN, CellStatus.X);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void IfAttemptIsMadeToMarkCellWithColumnNumberLessThanMinimumThenExceptionisThrown()
+        {
+            gameUnderTest.Play(Game.MIN_ROW_COLUMN, Game.MIN_ROW_COLUMN - 1, CellStatus.X);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void IfAttemptIsMadeToMarkCellWithColumnNumberGreaterThanMaximumThenExceptionIsThrown()
+        {
+            gameUnderTest.Play(Game.MIN_ROW_COLUMN, Game.MAX_ROW_COLUMN + 1, CellStatus.X);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void IfAttemptIsMadeToSetCellStatusToUnmarkedThenAnExceptionIsThrown()
+        {
+            gameUnderTest.Play(Game.MIN_ROW_COLUMN, Game.MIN_ROW_COLUMN, CellStatus.Unmarked);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void IfAttemptIsMadeToMarkACellWhichIsNotUnmarkedThenExceptionIsThrown()
+        {
+            gameUnderTest.Play(Game.MIN_ROW_COLUMN, Game.MIN_ROW_COLUMN, CellStatus.X);
+            gameUnderTest.Play(Game.MIN_ROW_COLUMN, Game.MIN_ROW_COLUMN, CellStatus.O);
+        }
+
+        [TestMethod]
+        public void AfterFirstPlayGameStatusBecomesInProgress()
+        {
+            gameUnderTest.Play(Game.MIN_ROW_COLUMN, Game.MIN_ROW_COLUMN, CellStatus.X);
+            Assert.IsTrue(gameUnderTest.Status == GameStatus.InProgress);
         }
     }
 }
