@@ -41,7 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CellAddress.cs" />
-    <Compile Include="CellStatus.cs" />
+    <Compile Include="CellContent.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameStatus.cs" />
     <Compile Include="PlayerRole.cs" />

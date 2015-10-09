@@ -14,9 +14,9 @@ namespace TicTacToe.Domain
         /// </summary>
         public const int GRID_SIZE = 3;
 
-        private CellStatus[,] _rawCells = new CellStatus[GRID_SIZE, GRID_SIZE];
-        private CellStatus GetCell(CellAddress address) => _rawCells[address.Row, address.Column];
-        private void SetCell(CellAddress address, CellStatus status) => _rawCells[address.Row, address.Column] = status;
+        private CellContent[,] _rawCells = new CellContent[GRID_SIZE, GRID_SIZE];
+        private CellContent GetCellContent(CellAddress address) => _rawCells[address.Row, address.Column];
+        private void SetCellContent(CellAddress address, CellContent content) => _rawCells[address.Row, address.Column] = content;
 
         /// <summary>
         /// Indicates the current state of play
@@ -27,7 +27,7 @@ namespace TicTacToe.Domain
         /// ID of player whose turn it is to play
         /// </summary>
         public PlayerRole PlayerTurn { get; private set; } = PlayerRole.Initiator;
-        public IEnumerable<CellStatus> CellStatuses => _rawCells.Cast<CellStatus>();
+        public IEnumerable<CellContent> CellsContent => _rawCells.Cast<CellContent>();
 
         /// <summary>
         /// Initializes a new Game with unmarked cells
@@ -38,7 +38,7 @@ namespace TicTacToe.Domain
             {
                 for (int column = 0; column < GRID_SIZE; column++)
                 {
-                    _rawCells[row, column] = CellStatus.Unmarked;
+                    _rawCells[row, column] = CellContent.Unmarked;
                 }
             }
         }
@@ -48,20 +48,20 @@ namespace TicTacToe.Domain
         /// </summary>
         /// <param name="row">Row number of cell</param>
         /// <param name="column">Column number of cell</param>
-        /// <param name="cellStatus">New status of cell</param>
-        public void Play(CellAddress cellAddress, CellStatus cellStatus)
+        /// <param name="content">New status of cell</param>
+        public void Play(CellAddress address, CellContent content)
         {
-            if (cellStatus != CellStatus.X && cellStatus != CellStatus.O)
+            if (content != CellContent.X && content != CellContent.O)
             {
-                throw new ArgumentException(nameof(cellStatus), $"'{nameof(cellStatus)}' '{cellStatus}' is invalid");
+                throw new ArgumentException(nameof(content), $"'{nameof(content)}' '{content}' is invalid");
             }
 
-            if (GetCell(cellAddress) != CellStatus.Unmarked)
+            if (GetCellContent(address) != CellContent.Unmarked)
             {
-                throw new InvalidOperationException($"Cell with row={cellAddress.Row} and column={cellAddress.Column} is already marked");
+                throw new InvalidOperationException($"Cell with row={address.Row} and column={address.Column} is already marked");
             }
 
-            SetCell(cellAddress, cellStatus);
+            SetCellContent(address, content);
 
             if (Status == GameStatus.New)
             {

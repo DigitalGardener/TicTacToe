@@ -1,9 +1,9 @@
 ﻿namespace TicTacToe.Domain
 {
     /// <summary>
-    /// Represents cell status
+    /// Represents cell's content
     /// </summary>
-    public enum CellStatus
+    public enum CellContent
     {
         /// <summary>
         /// Cell has been marked by one player
