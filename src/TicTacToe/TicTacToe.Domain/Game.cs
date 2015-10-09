@@ -14,27 +14,20 @@ namespace TicTacToe.Domain
         /// </summary>
         public const int GRID_SIZE = 3;
 
-        private CellStatus[,] _cells = new CellStatus[GRID_SIZE, GRID_SIZE];
-
-        /// <summary>
-        /// Maximum value for cell row numbers and column numbers
-        /// </summary>
-        public const int MAX_ROW_COLUMN = GRID_SIZE - 1;
-
-        /// <summary>
-        /// Minimum value for cell row numbers and column numbers
-        /// </summary>
-        public const int MIN_ROW_COLUMN = 0;
-
-        /// <summary>
-        /// Indicates the current status of all cells
-        /// </summary>
-        public IEnumerable<CellStatus> CellStatuses => _cells.Cast<CellStatus>();
+        private CellStatus[,] _rawCells = new CellStatus[GRID_SIZE, GRID_SIZE];
+        private CellStatus GetCell(CellAddress address) => _rawCells[address.Row, address.Column];
+        private void SetCell(CellAddress address, CellStatus status) => _rawCells[address.Row, address.Column] = status;
 
         /// <summary>
         /// Indicates the current state of play
         /// </summary>
         public GameStatus Status { get; private set; } = GameStatus.New;
+
+        /// <summary>
+        /// ID of player whose turn it is to play
+        /// </summary>
+        public PlayerID PlayerTurn { get; private set; } = PlayerID.Initiator;
+        public IEnumerable<CellStatus> CellStatuses => _rawCells.Cast<CellStatus>();
 
         /// <summary>
         /// Initializes a new Game with unmarked cells
@@ -45,7 +38,7 @@ namespace TicTacToe.Domain
             {
                 for (int column = 0; column < GRID_SIZE; column++)
                 {
-                    _cells[row, column] = CellStatus.Unmarked;
+                    _rawCells[row, column] = CellStatus.Unmarked;
                 }
             }
         }
@@ -55,36 +48,27 @@ namespace TicTacToe.Domain
         /// </summary>
         /// <param name="row">Row number of cell</param>
         /// <param name="column">Column number of cell</param>
-        /// <param name="status">New status of cell</param>
-        public void Play(int row, int column, CellStatus status)
+        /// <param name="cellStatus">New status of cell</param>
+        public void Play(CellAddress cellAddress, CellStatus cellStatus)
         {
-            if (row < MIN_ROW_COLUMN || row > MAX_ROW_COLUMN)
+            if (cellStatus != CellStatus.X && cellStatus != CellStatus.O)
             {
-                throw new ArgumentOutOfRangeException(nameof(row), $"'{nameof(row)}' should be between {MIN_ROW_COLUMN} and {MAX_ROW_COLUMN}");
+                throw new ArgumentException(nameof(cellStatus), $"'{nameof(cellStatus)}' '{cellStatus}' is invalid");
             }
 
-            if (column < MIN_ROW_COLUMN || column > MAX_ROW_COLUMN)
+            if (GetCell(cellAddress) != CellStatus.Unmarked)
             {
-                throw new ArgumentOutOfRangeException(nameof(column), $"'{nameof(column)}' should be between {MIN_ROW_COLUMN} and {MAX_ROW_COLUMN}");
+                throw new InvalidOperationException($"Cell with row={cellAddress.Row} and column={cellAddress.Column} is already marked");
             }
 
-            if (status != CellStatus.X && status != CellStatus.O)
-            {
-                throw new ArgumentException(nameof(status), $"'{nameof(status)}' '{status}' is invalid");
-            }
-
-            if (_cells[row, column] != CellStatus.Unmarked)
-            {
-                throw new InvalidOperationException($"Cell with row={row} and column={column} is already marked");
-            }
-
-            _cells[row, column] = status;
+            SetCell(cellAddress, cellStatus);
 
             if (Status == GameStatus.New)
             {
                 Status = GameStatus.InProgress;
             }
 
+            PlayerTurn = PlayerTurn == PlayerID.Initiator ? PlayerID.Opponent : PlayerID.Initiator;
         }
     }
 }

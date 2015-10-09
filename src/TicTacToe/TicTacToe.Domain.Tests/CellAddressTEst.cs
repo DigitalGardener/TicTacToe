@@ -1,16 +1,17 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using static System.Linq.Enumerable;
+﻿using System;
+using System.Text;
+using System.Collections.Generic;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TicTacToe.Domain.Tests
 {
     /// <summary>
-    /// Game instance tests
+    /// CellAddress instance tests
     /// </summary>
     [TestClass]
-    public class GameTest
+    public class CellAddressTest
     {
-        public GameTest()
+        public CellAddressTest()
         {
             //
             // TODO: Add constructor logic here
@@ -57,48 +58,33 @@ namespace TicTacToe.Domain.Tests
         //
         #endregion
 
-        Game gameUnderTest;
-        CellAddress firstCellAddress;
-
-        [TestInitialize()]
-        public void Initialize() {
-            gameUnderTest = new Game();
-            firstCellAddress = new CellAddress(CellAddress.MIN_ROW_COLUMN, CellAddress.MIN_ROW_COLUMN);
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void IfAttemptIsMadeToCreateAddressWithRowNumberLessThanMinimumThenExceptionIsThrown()
+        {
+            new CellAddress(CellAddress.MIN_ROW_COLUMN - 1, CellAddress.MIN_ROW_COLUMN);
         }
 
         [TestMethod]
-        public void AtStartOfGameStatusIsNew()
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void IfAttemptIsMadeToCreateAddressWithRowNumberGreaterThanMaximumThenExceptionIsThrown()
         {
-            Assert.IsTrue(gameUnderTest.Status == GameStatus.New);
+            new CellAddress(CellAddress.MAX_ROW_COLUMN + 1, CellAddress.MIN_ROW_COLUMN);
         }
 
         [TestMethod]
-        public void AtStartOfGameAllCellsAreUnmarked()
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void IfAttemptIsMadeToMakeCellAddressWithColumnNumberLessThanMinimumThenExceptionisThrown()
         {
-            Assert.IsTrue(gameUnderTest.CellStatuses.All(status => status == CellStatus.Unmarked));
-        }
-
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void IfAttemptIsMadeToSetCellStatusToUnmarkedThenAnExceptionIsThrown()
-        {
-            gameUnderTest.Play(firstCellAddress, CellStatus.Unmarked);
+            new CellAddress(CellAddress.MIN_ROW_COLUMN, CellAddress.MIN_ROW_COLUMN - 1);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException))]
-        public void IfAttemptIsMadeToMarkACellThatIsAlreadyMarkedThenExceptionIsThrown()
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void IfAttemptIsMadeToMakeCellAddressColumnNumberGreaterThanMaximumThenExceptionIsThrown()
         {
-            gameUnderTest.Play(firstCellAddress, CellStatus.X);
-            gameUnderTest.Play(firstCellAddress, CellStatus.O);
+            new CellAddress(CellAddress.MIN_ROW_COLUMN, CellAddress.MAX_ROW_COLUMN + 1);
         }
 
-        [TestMethod]
-        public void AfterFirstPlayGameStatusBecomesInProgress()
-        {
-            gameUnderTest.Play(firstCellAddress, CellStatus.X);
-            Assert.IsTrue(gameUnderTest.Status == GameStatus.InProgress);
-        }
     }
 }

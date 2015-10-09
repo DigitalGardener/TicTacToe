@@ -40,9 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CellAddress.cs" />
     <Compile Include="CellStatus.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameStatus.cs" />
+    <Compile Include="PlayerID.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
