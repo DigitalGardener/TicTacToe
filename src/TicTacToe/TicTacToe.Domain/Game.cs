@@ -26,7 +26,7 @@ namespace TicTacToe.Domain
         /// <summary>
         /// ID of player whose turn it is to play
         /// </summary>
-        public PlayerID PlayerTurn { get; private set; } = PlayerID.Initiator;
+        public PlayerRole PlayerTurn { get; private set; } = PlayerRole.Initiator;
         public IEnumerable<CellStatus> CellStatuses => _rawCells.Cast<CellStatus>();
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace TicTacToe.Domain
                 Status = GameStatus.InProgress;
             }
 
-            PlayerTurn = PlayerTurn == PlayerID.Initiator ? PlayerID.Opponent : PlayerID.Initiator;
+            PlayerTurn = PlayerTurn == PlayerRole.Initiator ? PlayerRole.Opponent : PlayerRole.Initiator;
         }
     }
 }

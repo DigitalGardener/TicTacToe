@@ -1,9 +1,9 @@
 ﻿namespace TicTacToe.Domain
 {
     /// <summary>
-    /// Represents player's identity
+    /// Represents player's role
     /// </summary>
-    public enum PlayerID
+    public enum PlayerRole
     {
         Initiator,
         Opponent
