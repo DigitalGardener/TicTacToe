@@ -28,40 +28,6 @@ namespace TicTacToe.Domain
         /// </summary>
         public CellContent LastPlayCellContent { get; private set; }
 
-        private CellAddress[][] _possibleWinningCombinations = {
-            //Row cell combinations
-            new CellAddress[] { new CellAddress(0, 0), new CellAddress(0,1), new CellAddress(0, 2) },
-            new CellAddress[] { new CellAddress(1, 0), new CellAddress(1,1), new CellAddress(1, 2) },
-            new CellAddress[] { new CellAddress(2, 0), new CellAddress(2,1), new CellAddress(2, 2) },
-
-            //Column cell combinations
-            new CellAddress[] { new CellAddress(0, 0), new CellAddress(1,0), new CellAddress(2, 0) },
-            new CellAddress[] { new CellAddress(0, 1), new CellAddress(1,1), new CellAddress(2, 1) },
-            new CellAddress[] { new CellAddress(0, 2), new CellAddress(1,2), new CellAddress(2, 2) },
-
-            //Diagonal cell combinations
-            new CellAddress[] { new CellAddress(0, 0), new CellAddress(1,1), new CellAddress(2, 2) },
-            new CellAddress[] { new CellAddress(0, 2), new CellAddress(1,1), new CellAddress(2, 0) },
-        };
-
-        private CellAddress[] _winningCombination;
-        /// <summary>
-        /// Winning combination of marked cells if it exists
-        /// </summary>
-        public CellAddress[] WinningCombination
-        {
-            get
-            {
-                if (_winningCombination == null)
-                {
-                    _winningCombination = _possibleWinningCombinations.FirstOrDefault(cellAddresses =>
-                        GetCellContent(cellAddresses[0]) != CellContent.Unmarked
-                        && GetCellContent(cellAddresses[0]) == GetCellContent(cellAddresses[1])
-                        && GetCellContent(cellAddresses[1]) == GetCellContent(cellAddresses[2]));
-                }
-                return _winningCombination;
-            }
-        }
 
         /// <summary>
         /// Sets the status of a cell
