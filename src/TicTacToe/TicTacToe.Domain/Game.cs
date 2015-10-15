@@ -12,6 +12,11 @@ namespace TicTacToe.Domain
         private CellContent[,] _rawCells = new CellContent[CellAddress.GRID_SIZE, CellAddress.GRID_SIZE];
         private CellContent GetCellContent(CellAddress address) => _rawCells[address.Row, address.Column];
         private void SetCellContent(CellAddress address, CellContent content) => _rawCells[address.Row, address.Column] = content;
+ 
+        /// <summary>
+        /// Contents of all cells in particular order
+        /// </summary>
+        public IEnumerable<CellContent> CellsContent => _rawCells.Cast<CellContent>();
 
         /// <summary>
         /// Indicates the current state of play
@@ -22,11 +27,6 @@ namespace TicTacToe.Domain
         /// Contents of cell marked by last player
         /// </summary>
         public CellContent LastPlayCellContent { get; private set; }
-
-        /// <summary>
-        /// Contents of all cells in particular order
-        /// </summary>
-        public IEnumerable<CellContent> CellsContent => _rawCells.Cast<CellContent>();
 
         /// <summary>
         /// Sets the status of a cell
