@@ -9,12 +9,7 @@ namespace TicTacToe.Domain
     /// </summary>
     public class Game
     {
-        /// <summary>
-        /// Size of Tic-Tac-Toe grid
-        /// </summary>
-        public const int GRID_SIZE = 3;
-
-        private CellContent[,] _rawCells = new CellContent[GRID_SIZE, GRID_SIZE];
+        private CellContent[,] _rawCells = new CellContent[CellAddress.GRID_SIZE, CellAddress.GRID_SIZE];
         private CellContent GetCellContent(CellAddress address) => _rawCells[address.Row, address.Column];
         private void SetCellContent(CellAddress address, CellContent content) => _rawCells[address.Row, address.Column] = content;
 
