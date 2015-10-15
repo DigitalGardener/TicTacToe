@@ -78,7 +78,6 @@ namespace TicTacToe.Domain.Tests
             Assert.IsTrue(gameUnderTest.CellsContent.All(content => content == CellContent.Unmarked));
         }
 
-
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void IfAttemptIsMadeToSetCellStatusToUnmarkedThenAnExceptionIsThrown()
@@ -99,6 +98,24 @@ namespace TicTacToe.Domain.Tests
         {
             gameUnderTest.Play(firstCellAddress, CellContent.X);
             Assert.IsTrue(gameUnderTest.Status == GameStatus.InProgress);
+        }
+
+        [TestMethod]
+        public void AfterPlayIsMadeLastPlayCellContentIsEqual()
+        {
+            var content = CellContent.X;
+            gameUnderTest.Play(firstCellAddress, content);
+
+            Assert.AreEqual(content, gameUnderTest.LastPlayCellContent);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void IfCellContentIsSetToSameValueInTwoConsecutivePlaysThenAnExceptionIsThrown()
+        {
+            var content = CellContent.X;
+            gameUnderTest.Play(firstCellAddress, content);
+            gameUnderTest.Play(new CellAddress(2,2), content);
         }
     }
 }

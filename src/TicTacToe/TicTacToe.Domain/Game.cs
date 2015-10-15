@@ -24,9 +24,13 @@ namespace TicTacToe.Domain
         public GameStatus Status { get; private set; } = GameStatus.New;
 
         /// <summary>
-        /// ID of player whose turn it is to play
+        /// Contents of cell marked by last player
         /// </summary>
-        public PlayerRole PlayerTurn { get; private set; } = PlayerRole.Initiator;
+        public CellContent LastPlayCellContent { get; private set; }
+
+        /// <summary>
+        /// Contents of all cells in particular order
+        /// </summary>
         public IEnumerable<CellContent> CellsContent => _rawCells.Cast<CellContent>();
 
         /// <summary>
@@ -42,6 +46,11 @@ namespace TicTacToe.Domain
                 throw new ArgumentException(nameof(content), $"'{nameof(content)}' '{content}' is invalid");
             }
 
+            if (LastPlayCellContent != CellContent.Unmarked && LastPlayCellContent == content)
+            {
+                throw new ArgumentException(nameof(content), $"'{content}' cannot be play two times consecutively");
+            }
+
             if (GetCellContent(address) != CellContent.Unmarked)
             {
                 throw new InvalidOperationException($"Cell with row={address.Row} and column={address.Column} is already marked");
@@ -54,7 +63,7 @@ namespace TicTacToe.Domain
                 Status = GameStatus.InProgress;
             }
 
-            PlayerTurn = PlayerTurn == PlayerRole.Initiator ? PlayerRole.Opponent : PlayerRole.Initiator;
+            LastPlayCellContent = content;
         }
     }
 }
