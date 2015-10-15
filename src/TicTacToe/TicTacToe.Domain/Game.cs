@@ -30,20 +30,6 @@ namespace TicTacToe.Domain
         public IEnumerable<CellContent> CellsContent => _rawCells.Cast<CellContent>();
 
         /// <summary>
-        /// Initializes a new Game with unmarked cells
-        /// </summary>
-        public Game()
-        {
-            for (int row = 0; row < GRID_SIZE; row++)
-            {
-                for (int column = 0; column < GRID_SIZE; column++)
-                {
-                    _rawCells[row, column] = CellContent.Unmarked;
-                }
-            }
-        }
-
-        /// <summary>
         /// Sets the status of a cell
         /// </summary>
         /// <param name="row">Row number of cell</param>
