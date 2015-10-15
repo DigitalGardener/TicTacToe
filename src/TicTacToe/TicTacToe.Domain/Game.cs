@@ -28,6 +28,7 @@ namespace TicTacToe.Domain
         /// </summary>
         public CellContent LastPlayCellContent { get; private set; }
 
+
         /// <summary>
         /// Sets the status of a cell
         /// </summary>
@@ -43,7 +44,7 @@ namespace TicTacToe.Domain
 
             if (LastPlayCellContent != CellContent.Unmarked && LastPlayCellContent == content)
             {
-                throw new ArgumentException(nameof(content), $"'{content}' cannot be play two times consecutively");
+                throw new ArgumentException(nameof(content), $"'{content}' cannot be played two times consecutively");
             }
 
             if (GetCellContent(address) != CellContent.Unmarked)
