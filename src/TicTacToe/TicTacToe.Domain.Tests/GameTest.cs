@@ -121,7 +121,7 @@ namespace TicTacToe.Domain.Tests
         [TestMethod]
         public void AtStartOfGameThereIsNoWinner()
         {
-            Assert.IsNull(gameUnderTest.WinningCombination);
+            Assert.IsFalse(gameUnderTest.HasWinner);
         }
 
         [TestMethod]
@@ -133,7 +133,7 @@ namespace TicTacToe.Domain.Tests
             gameUnderTest.Play(new CellAddress(2, 0), CellContent.O);
             gameUnderTest.Play(new CellAddress(0, 2), CellContent.X);
 
-            Assert.IsNotNull(gameUnderTest.WinningCombination);
+            Assert.IsTrue(gameUnderTest.HasWinner);
         }
 
         [TestMethod]
@@ -145,7 +145,7 @@ namespace TicTacToe.Domain.Tests
             gameUnderTest.Play(new CellAddress(2, 0), CellContent.O);
             gameUnderTest.Play(new CellAddress(1, 2), CellContent.X);
 
-            Assert.IsNotNull(gameUnderTest.WinningCombination);
+            Assert.IsTrue(gameUnderTest.HasWinner);
         }
 
         [TestMethod]
@@ -157,7 +157,7 @@ namespace TicTacToe.Domain.Tests
             gameUnderTest.Play(new CellAddress(1, 0), CellContent.O);
             gameUnderTest.Play(new CellAddress(2, 2), CellContent.X);
 
-            Assert.IsNotNull(gameUnderTest.WinningCombination);
+            Assert.IsTrue(gameUnderTest.HasWinner);
         }
 
 
@@ -170,7 +170,7 @@ namespace TicTacToe.Domain.Tests
             gameUnderTest.Play(new CellAddress(0, 2), CellContent.O);
             gameUnderTest.Play(new CellAddress(2, 0), CellContent.X);
 
-            Assert.IsNotNull(gameUnderTest.WinningCombination);
+            Assert.IsTrue(gameUnderTest.HasWinner);
         }
 
         [TestMethod]
@@ -182,7 +182,7 @@ namespace TicTacToe.Domain.Tests
             gameUnderTest.Play(new CellAddress(0, 2), CellContent.O);
             gameUnderTest.Play(new CellAddress(2, 1), CellContent.X);
 
-            Assert.IsNotNull(gameUnderTest.WinningCombination);
+            Assert.IsTrue(gameUnderTest.HasWinner);
         }
 
         [TestMethod]
@@ -194,7 +194,7 @@ namespace TicTacToe.Domain.Tests
             gameUnderTest.Play(new CellAddress(0, 1), CellContent.O);
             gameUnderTest.Play(new CellAddress(2, 2), CellContent.X);
 
-            Assert.IsNotNull(gameUnderTest.WinningCombination);
+            Assert.IsTrue(gameUnderTest.HasWinner);
         }
 
         [TestMethod]
@@ -206,7 +206,7 @@ namespace TicTacToe.Domain.Tests
             gameUnderTest.Play(new CellAddress(2, 0), CellContent.O);
             gameUnderTest.Play(new CellAddress(2, 2), CellContent.X);
 
-            Assert.IsNotNull(gameUnderTest.WinningCombination);
+            Assert.IsTrue(gameUnderTest.HasWinner);
         }
 
         [TestMethod]
@@ -218,7 +218,7 @@ namespace TicTacToe.Domain.Tests
             gameUnderTest.Play(new CellAddress(1, 0), CellContent.O);
             gameUnderTest.Play(new CellAddress(0, 2), CellContent.X);
 
-            Assert.IsNotNull(gameUnderTest.WinningCombination);
+            Assert.IsTrue(gameUnderTest.HasWinner);
         }
 
     }

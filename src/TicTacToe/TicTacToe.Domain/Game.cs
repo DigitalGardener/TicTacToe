@@ -64,6 +64,12 @@ namespace TicTacToe.Domain
             }
 
         }
+
+        /// <summary>
+        /// Indicates whether a player has won the game
+        /// </summary>
+        public bool HasWinner => WinningCombination != null;
+
         /// <summary>
         /// Sets the status of a cell
         /// </summary>
