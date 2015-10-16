@@ -117,5 +117,109 @@ namespace TicTacToe.Domain.Tests
             gameUnderTest.Play(firstCellAddress, content);
             gameUnderTest.Play(new CellAddress(2,2), content);
         }
+
+        [TestMethod]
+        public void AtStartOfGameThereIsNoWinner()
+        {
+            Assert.IsNull(gameUnderTest.WinningCombination);
+        }
+
+        [TestMethod]
+        public void WhenPlayerMarksAllCellsInFirstRowGameHasWinner()
+        {
+            gameUnderTest.Play(new CellAddress(0, 0), CellContent.X);
+            gameUnderTest.Play(new CellAddress(1, 0), CellContent.O);
+            gameUnderTest.Play(new CellAddress(0, 1), CellContent.X);
+            gameUnderTest.Play(new CellAddress(2, 0), CellContent.O);
+            gameUnderTest.Play(new CellAddress(0, 2), CellContent.X);
+
+            Assert.IsNotNull(gameUnderTest.WinningCombination);
+        }
+
+        [TestMethod]
+        public void WhenPlayerMarksAllCellsInSecondRowGameHasWinner()
+        {
+            gameUnderTest.Play(new CellAddress(1, 0), CellContent.X);
+            gameUnderTest.Play(new CellAddress(0, 0), CellContent.O);
+            gameUnderTest.Play(new CellAddress(1, 1), CellContent.X);
+            gameUnderTest.Play(new CellAddress(2, 0), CellContent.O);
+            gameUnderTest.Play(new CellAddress(1, 2), CellContent.X);
+
+            Assert.IsNotNull(gameUnderTest.WinningCombination);
+        }
+
+        [TestMethod]
+        public void WhenPlayerMarksAllCellsInThirdRowGameHasWinner()
+        {
+            gameUnderTest.Play(new CellAddress(2, 0), CellContent.X);
+            gameUnderTest.Play(new CellAddress(0, 0), CellContent.O);
+            gameUnderTest.Play(new CellAddress(2, 1), CellContent.X);
+            gameUnderTest.Play(new CellAddress(1, 0), CellContent.O);
+            gameUnderTest.Play(new CellAddress(2, 2), CellContent.X);
+
+            Assert.IsNotNull(gameUnderTest.WinningCombination);
+        }
+
+
+        [TestMethod]
+        public void WhenPlayerMarksAllCellsInFirstColumnGameHasWinner()
+        {
+            gameUnderTest.Play(new CellAddress(0, 0), CellContent.X);
+            gameUnderTest.Play(new CellAddress(0, 1), CellContent.O);
+            gameUnderTest.Play(new CellAddress(1, 0), CellContent.X);
+            gameUnderTest.Play(new CellAddress(0, 2), CellContent.O);
+            gameUnderTest.Play(new CellAddress(2, 0), CellContent.X);
+
+            Assert.IsNotNull(gameUnderTest.WinningCombination);
+        }
+
+        [TestMethod]
+        public void WhenPlayerMarksAllCellsInSecondColumnGameThenHasWinner()
+        {
+            gameUnderTest.Play(new CellAddress(0, 1), CellContent.X);
+            gameUnderTest.Play(new CellAddress(0, 0), CellContent.O);
+            gameUnderTest.Play(new CellAddress(1, 1), CellContent.X);
+            gameUnderTest.Play(new CellAddress(0, 2), CellContent.O);
+            gameUnderTest.Play(new CellAddress(2, 1), CellContent.X);
+
+            Assert.IsNotNull(gameUnderTest.WinningCombination);
+        }
+
+        [TestMethod]
+        public void WhenPlayerMarksAllCellsInThirdColumnThenGameHasAWinner()
+        {
+            gameUnderTest.Play(new CellAddress(0, 2), CellContent.X);
+            gameUnderTest.Play(new CellAddress(0, 0), CellContent.O);
+            gameUnderTest.Play(new CellAddress(1, 2), CellContent.X);
+            gameUnderTest.Play(new CellAddress(0, 1), CellContent.O);
+            gameUnderTest.Play(new CellAddress(2, 2), CellContent.X);
+
+            Assert.IsNotNull(gameUnderTest.WinningCombination);
+        }
+
+        [TestMethod]
+        public void WhenPlayerMarksAllCellsInTopLeftDiagonalThenGameHasAWinner()
+        {
+            gameUnderTest.Play(new CellAddress(0, 0), CellContent.X);
+            gameUnderTest.Play(new CellAddress(1, 0), CellContent.O);
+            gameUnderTest.Play(new CellAddress(1, 1), CellContent.X);
+            gameUnderTest.Play(new CellAddress(2, 0), CellContent.O);
+            gameUnderTest.Play(new CellAddress(2, 2), CellContent.X);
+
+            Assert.IsNotNull(gameUnderTest.WinningCombination);
+        }
+
+        [TestMethod]
+        public void WhenPlayerMarksAllCellsInBottomLeftDiagonalThenGameHasAWinner()
+        {
+            gameUnderTest.Play(new CellAddress(2, 0), CellContent.X);
+            gameUnderTest.Play(new CellAddress(0, 0), CellContent.O);
+            gameUnderTest.Play(new CellAddress(1, 1), CellContent.X);
+            gameUnderTest.Play(new CellAddress(1, 0), CellContent.O);
+            gameUnderTest.Play(new CellAddress(0, 2), CellContent.X);
+
+            Assert.IsNotNull(gameUnderTest.WinningCombination);
+        }
+
     }
 }

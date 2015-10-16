@@ -28,7 +28,42 @@ namespace TicTacToe.Domain
         /// </summary>
         public CellContent LastPlayCellContent { get; private set; }
 
+        private CellAddress[][] _possibleWinningCombinations = {
+            //Row combinations
+            new CellAddress[] { new CellAddress(0,0), new CellAddress(0,1), new CellAddress(0,2) },
+            new CellAddress[] { new CellAddress(1,0), new CellAddress(1,1), new CellAddress(1,2) },
+            new CellAddress[] { new CellAddress(2,0), new CellAddress(2,1), new CellAddress(2,2) },
 
+            //Column combinations
+            new CellAddress[] { new CellAddress(0,0), new CellAddress(1,0), new CellAddress(2,0) },
+            new CellAddress[] { new CellAddress(0,1), new CellAddress(1,1), new CellAddress(2,1) },
+            new CellAddress[] { new CellAddress(0,2), new CellAddress(1,2), new CellAddress(2,2) },
+
+            //Diagonal combinations
+            new CellAddress[] { new CellAddress(0,0), new CellAddress(1,1), new CellAddress(2,2) },
+            new CellAddress[] { new CellAddress(2,0), new CellAddress(1,1), new CellAddress(0,2) }
+        };
+
+        private CellAddress[] _winningCombination;
+        /// <summary>
+        /// Addresses of cells that make up the winning combination of marked cells
+        /// </summary>
+        public CellAddress[] WinningCombination
+        {
+            get
+            {
+                if (_winningCombination == null)
+                {
+                    _winningCombination = _possibleWinningCombinations.FirstOrDefault(addresses =>
+                                            GetCellContent(addresses[0]) != CellContent.Unmarked
+                                            && GetCellContent(addresses[0]) == GetCellContent(addresses[1])
+                                            && GetCellContent(addresses[1]) == GetCellContent(addresses[2])
+                                            );
+                }
+                return _winningCombination;
+            }
+
+        }
         /// <summary>
         /// Sets the status of a cell
         /// </summary>
