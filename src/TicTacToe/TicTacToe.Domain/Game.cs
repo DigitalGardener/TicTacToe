@@ -28,23 +28,61 @@ namespace TicTacToe.Domain
         /// </summary>
         public CellContent LastPlayCellContent { get; private set; }
 
-        private CellAddress[][] _possibleWinningCombinations = {
-            //Row combinations
-            new CellAddress[] { new CellAddress(0,0), new CellAddress(0,1), new CellAddress(0,2) },
-            new CellAddress[] { new CellAddress(1,0), new CellAddress(1,1), new CellAddress(1,2) },
-            new CellAddress[] { new CellAddress(2,0), new CellAddress(2,1), new CellAddress(2,2) },
+        /// <summary>
+        /// Addresses of cells in the first row of game grid
+        /// </summary>
+        public static readonly CellAddress[] FirstRow;
+        /// <summary>
+        /// Addresses of cells in the second row of game grid
+        /// </summary>
+        public static readonly CellAddress[] SecondRow;
+        /// <summary>
+        /// Addresses of cells in the third row of game grid
+        /// </summary>
+        public static readonly CellAddress[] ThirdRow;
+        /// <summary>
+        /// Addresses of cells in the first column of game grid
+        /// </summary
+        public static readonly CellAddress[] FirstColumn;
+        /// <summary>
+        /// Addresses of cells in the second column of game grid
+        /// </summary>
+        public static CellAddress[] SecondColumn { get; private set; }
+        /// <summary>
+        /// Addresses of cells in the third column of game grid
+        /// </summary>
+        public static readonly CellAddress[] ThirdColumn;
+        /// <summary>
+        /// Addresses of cells in the diagonal which starts in the top left corner of the game grid
+        /// </summary>
+        public static readonly CellAddress[] TopLeftDiagonal;
+        /// <summary>
+        /// Addresses of cells in the diagonal which starts in the top right corner of the game grid
+        /// </summary>
+        public static readonly CellAddress[] TopRightDiagonal;
 
-            //Column combinations
-            new CellAddress[] { new CellAddress(0,0), new CellAddress(1,0), new CellAddress(2,0) },
-            new CellAddress[] { new CellAddress(0,1), new CellAddress(1,1), new CellAddress(2,1) },
-            new CellAddress[] { new CellAddress(0,2), new CellAddress(1,2), new CellAddress(2,2) },
+        static private CellAddress[][] _possibleWinningCombinations;
 
-            //Diagonal combinations
-            new CellAddress[] { new CellAddress(0,0), new CellAddress(1,1), new CellAddress(2,2) },
-            new CellAddress[] { new CellAddress(2,0), new CellAddress(1,1), new CellAddress(0,2) }
-        };
+        static Game()
+        {
+            _possibleWinningCombinations = new CellAddress[][]{
+
+            FirstRow = new CellAddress[] { new CellAddress(0, 0), new CellAddress(0, 1), new CellAddress(0, 2) },
+            SecondRow = new CellAddress[] { new CellAddress(1, 0), new CellAddress(1, 1), new CellAddress(1, 2) },
+            ThirdRow = new CellAddress[] { new CellAddress(2, 0), new CellAddress(2, 1), new CellAddress(2, 2) },
+
+            FirstColumn = new CellAddress[] { new CellAddress(0, 0), new CellAddress(1, 0), new CellAddress(2, 0) },
+            SecondColumn = new CellAddress[] { new CellAddress(0, 1), new CellAddress(1, 1), new CellAddress(2, 1) },
+            ThirdColumn = new CellAddress[] { new CellAddress(0, 2), new CellAddress(1, 2), new CellAddress(2, 2) },
+
+            TopLeftDiagonal = new CellAddress[] { new CellAddress(0, 0), new CellAddress(1, 1), new CellAddress(2, 2) },
+            TopRightDiagonal = new CellAddress[] { new CellAddress(2, 0), new CellAddress(1, 1), new CellAddress(0, 2) }
+
+            };
+        }
 
         private CellAddress[] _winningCombination;
+
         /// <summary>
         /// Addresses of cells that make up the winning combination of marked cells
         /// </summary>

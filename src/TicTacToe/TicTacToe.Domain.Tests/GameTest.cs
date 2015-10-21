@@ -221,5 +221,103 @@ namespace TicTacToe.Domain.Tests
             Assert.IsTrue(gameUnderTest.HasWinner);
         }
 
+        [TestMethod]
+        public void WhenPlayerMarksAllCellsInFirstRowThenWinningCombinationReturnsTheirAddresses()
+        {
+            gameUnderTest.Play(Game.FirstRow[0], CellContent.X);
+            gameUnderTest.Play(new CellAddress(1,0), CellContent.O);
+            gameUnderTest.Play(Game.FirstRow[1], CellContent.X);
+            gameUnderTest.Play(new CellAddress(2,0), CellContent.O);
+            gameUnderTest.Play(Game.FirstRow[2], CellContent.X);
+
+            Assert.IsTrue(Game.FirstRow.All(cellAddress => gameUnderTest.WinningCombination.Contains(cellAddress)));
+        }
+
+        [TestMethod]
+        public void WhenPlayerMarksAllCellsInSecondRowThenWinningCombinationReturnsTheirAddresses()
+        {
+            gameUnderTest.Play(Game.SecondRow[0], CellContent.X);
+            gameUnderTest.Play(new CellAddress(0,0), CellContent.O);
+            gameUnderTest.Play(Game.SecondRow[1], CellContent.X);
+            gameUnderTest.Play(new CellAddress(2,0), CellContent.O);
+            gameUnderTest.Play(Game.SecondRow[2], CellContent.X);
+
+            Assert.IsTrue(Game.SecondRow.All(cellAddress => gameUnderTest.WinningCombination.Contains(cellAddress)));
+
+        }
+
+        [TestMethod]
+        public void WhenPlayerMarksAllCellsInThirdRowThenWinningCombinationReturnsTheirAddresses()
+        {
+            gameUnderTest.Play(Game.ThirdRow[0], CellContent.X);
+            gameUnderTest.Play(new CellAddress(0, 0), CellContent.O);
+            gameUnderTest.Play(Game.ThirdRow[1], CellContent.X);
+            gameUnderTest.Play(new CellAddress(1, 0), CellContent.O);
+            gameUnderTest.Play(Game.ThirdRow[2], CellContent.X);
+
+            Assert.IsTrue(Game.ThirdRow.All(cellAddress => gameUnderTest.WinningCombination.Contains(cellAddress)));
+
+        }
+
+        [TestMethod]
+        public void WhenPlayerMarksAllCellsInFirstColumnThenWinningCombinationReturnsTheirAddresses()
+        {
+            gameUnderTest.Play(Game.FirstColumn[0], CellContent.X);
+            gameUnderTest.Play(new CellAddress(0, 1), CellContent.O);
+            gameUnderTest.Play(Game.FirstColumn[1], CellContent.X);
+            gameUnderTest.Play(new CellAddress(1, 1), CellContent.O);
+            gameUnderTest.Play(Game.FirstColumn[2], CellContent.X);
+
+            Assert.IsTrue(Game.FirstColumn.All(cellAddress => gameUnderTest.WinningCombination.Contains(cellAddress)));
+
+        }
+
+        [TestMethod]
+        public void WhenPlayerMarksAllCellsInSecondColumnThenWinningCombinationReturnsTheirAddresses()
+        {
+            gameUnderTest.Play(Game.SecondColumn[0], CellContent.X);
+            gameUnderTest.Play(new CellAddress(0, 0), CellContent.O);
+            gameUnderTest.Play(Game.SecondColumn[1], CellContent.X);
+            gameUnderTest.Play(new CellAddress(1, 0), CellContent.O);
+            gameUnderTest.Play(Game.SecondColumn[2], CellContent.X);
+
+            Assert.IsTrue(Game.SecondColumn.All(cellAddress => gameUnderTest.WinningCombination.Contains(cellAddress)));
+        }
+
+        [TestMethod]
+        public void WhenPlayerMarksAllCellsInThirdColumnThenWinningCombinationReturnsTheirAddresses()
+        {
+            gameUnderTest.Play(Game.ThirdColumn[0], CellContent.X);
+            gameUnderTest.Play(new CellAddress(0, 0), CellContent.O);
+            gameUnderTest.Play(Game.ThirdColumn[1], CellContent.X);
+            gameUnderTest.Play(new CellAddress(1, 0), CellContent.O);
+            gameUnderTest.Play(Game.ThirdColumn[2], CellContent.X);
+
+            Assert.IsTrue(Game.ThirdColumn.All(cellAddress => gameUnderTest.WinningCombination.Contains(cellAddress)));
+        }
+
+        [TestMethod]
+        public void WhenPlayerMarksAllCellsInTopLeftDiagonalThenWinningCombinationReturnsTheirAddresses()
+        {
+            gameUnderTest.Play(Game.TopLeftDiagonal[0], CellContent.X);
+            gameUnderTest.Play(new CellAddress(1, 0), CellContent.O);
+            gameUnderTest.Play(Game.TopLeftDiagonal[1], CellContent.X);
+            gameUnderTest.Play(new CellAddress(2, 0), CellContent.O);
+            gameUnderTest.Play(Game.TopLeftDiagonal[2], CellContent.X);
+
+            Assert.IsTrue(Game.TopLeftDiagonal.All(cellAddress => gameUnderTest.WinningCombination.Contains(cellAddress)));
+        }
+
+        [TestMethod]
+        public void WhenPlayerMarksAllCellsInTopRightDiagonalThenWinningCombinationReturnsTheirAddresses()
+        {
+            gameUnderTest.Play(Game.TopRightDiagonal[0], CellContent.X);
+            gameUnderTest.Play(new CellAddress(0, 0), CellContent.O);
+            gameUnderTest.Play(Game.TopRightDiagonal[1], CellContent.X);
+            gameUnderTest.Play(new CellAddress(1, 0), CellContent.O);
+            gameUnderTest.Play(Game.TopRightDiagonal[2], CellContent.X);
+
+            Assert.IsTrue(Game.TopRightDiagonal.All(cellAddress => gameUnderTest.WinningCombination.Contains(cellAddress)));
+        }
     }
 }
