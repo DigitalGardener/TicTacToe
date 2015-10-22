@@ -138,6 +138,21 @@ namespace TicTacToe.Domain.Tests
             gameUnderTest.Play(new CellAddress(1, 0), CellContent.O);
             gameUnderTest.Play(new CellAddress(0, 2), CellContent.X);
         }
+
+        private void AllCellsMarkedWithoutProducingAWinnner()
+        {
+            gameUnderTest.Play(new CellAddress(1, 1), CellContent.O);
+            gameUnderTest.Play(new CellAddress(0, 0), CellContent.X);
+            gameUnderTest.Play(new CellAddress(1, 0), CellContent.O);
+
+            gameUnderTest.Play(new CellAddress(1, 2), CellContent.X);
+            gameUnderTest.Play(new CellAddress(2, 1), CellContent.O);
+            gameUnderTest.Play(new CellAddress(0, 1), CellContent.X);
+
+            gameUnderTest.Play(new CellAddress(0, 2), CellContent.O);
+            gameUnderTest.Play(new CellAddress(2, 0), CellContent.X);
+            gameUnderTest.Play(new CellAddress(2, 2), CellContent.O);
+        }
         #endregion
 
         [TestMethod]
@@ -396,6 +411,22 @@ namespace TicTacToe.Domain.Tests
             PlayerMarksAllCellsInFirstRow();
 
             gameUnderTest.Play(new CellAddress(1, 1), CellContent.O);
+        }
+
+        [TestMethod]
+        public void WhenAllCellsAreMarkedWithoutProducingAWinnerThenGamesIsDrawn()
+        {
+            AllCellsMarkedWithoutProducingAWinnner();
+
+            Assert.IsTrue(gameUnderTest.IsDrawn);
+        }
+
+        [TestMethod]
+        public void WhenAllCellsMarkedWithoutProducingAWinnerThenGamesStatusIsOver()
+        {
+            AllCellsMarkedWithoutProducingAWinnner();
+
+            Assert.AreEqual(GameStatus.Over, gameUnderTest.Status);
         }
     }
 }

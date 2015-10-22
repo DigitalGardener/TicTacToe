@@ -108,6 +108,22 @@ namespace TicTacToe.Domain
         /// </summary>
         public bool HasWinner => WinningCombination != null;
 
+        private bool _isDrawn;
+        /// <summary>
+        /// Indicates whether all cells have been marked without producing a winner
+        /// </summary>
+        public bool IsDrawn
+        {
+            get
+            {
+                if (!_isDrawn && !HasWinner)
+                {
+                    _isDrawn = CellsContent.All(content => !content.Equals(CellContent.Unmarked));
+                }
+                return _isDrawn;
+            }
+        }
+
         /// <summary>
         /// Sets the status of a cell
         /// </summary>
@@ -143,7 +159,7 @@ namespace TicTacToe.Domain
                 Status = GameStatus.InProgress;
             }
 
-            if (HasWinner)
+            if (HasWinner || IsDrawn)
             {
                 Status = GameStatus.Over;
             }
