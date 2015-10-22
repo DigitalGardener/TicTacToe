@@ -134,7 +134,7 @@ namespace TicTacToe.Domain
         {
             if (Status == GameStatus.Over)
             {
-                throw new InvalidOperationException("Played cannot be made after game is over");
+                throw new InvalidOperationException("Play cannot be made after game is over");
             }
 
             if (content != CellContent.X && content != CellContent.O)
