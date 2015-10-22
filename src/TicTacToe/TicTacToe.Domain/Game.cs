@@ -138,6 +138,11 @@ namespace TicTacToe.Domain
                 Status = GameStatus.InProgress;
             }
 
+            if (HasWinner)
+            {
+                Status = GameStatus.Over;
+            }
+
             LastPlayCellContent = content;
         }
     }

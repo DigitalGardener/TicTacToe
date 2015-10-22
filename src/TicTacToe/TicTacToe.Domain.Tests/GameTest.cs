@@ -276,7 +276,6 @@ namespace TicTacToe.Domain.Tests
             PlayerMarksAllCellsInSecondRow();
 
             Assert.IsTrue(Game.SecondRow.All(cellAddress => gameUnderTest.WinningCombination.Contains(cellAddress)));
-
         }
 
         [TestMethod]
@@ -285,7 +284,6 @@ namespace TicTacToe.Domain.Tests
             PlayerMarksAllCellsInThirdRow();
 
             Assert.IsTrue(Game.ThirdRow.All(cellAddress => gameUnderTest.WinningCombination.Contains(cellAddress)));
-
         }
 
         [TestMethod]
@@ -294,7 +292,6 @@ namespace TicTacToe.Domain.Tests
             PlayerMarksAllCellsInFirstColumn();
 
             Assert.IsTrue(Game.FirstColumn.All(cellAddress => gameUnderTest.WinningCombination.Contains(cellAddress)));
-
         }
 
         [TestMethod]
@@ -327,6 +324,69 @@ namespace TicTacToe.Domain.Tests
             PlayerMarksAllCellsInTopRightDiagonal();
 
             Assert.IsTrue(Game.TopRightDiagonal.All(cellAddress => gameUnderTest.WinningCombination.Contains(cellAddress)));
+        }
+
+        [TestMethod]
+        public void WhenPlayerMarksAllCellsInFirstRowThenGameStatusBecomesIsOver()
+        {
+            PlayerMarksAllCellsInFirstRow();
+
+            Assert.AreEqual(GameStatus.Over, gameUnderTest.Status);
+        }
+
+        [TestMethod]
+        public void WhenPlayerMarksAllCellsInSecondRowThenGameStatusBecomesIsOver()
+        {
+            PlayerMarksAllCellsInSecondRow();
+
+            Assert.AreEqual(GameStatus.Over, gameUnderTest.Status);
+        }
+
+        [TestMethod]
+        public void WhenPlayerMarksAllCellsInThirdRowThenGameStatusBecomesIsOver()
+        {
+            PlayerMarksAllCellsInThirdRow();
+
+            Assert.AreEqual(GameStatus.Over, gameUnderTest.Status);
+        }
+
+        [TestMethod]
+        public void WhenPlayerMarksAllCellsInFirstColumnThenGameStatusBecomesIsOver()
+        {
+            PlayerMarksAllCellsInFirstColumn();
+
+            Assert.AreEqual(GameStatus.Over, gameUnderTest.Status);
+        }
+
+        [TestMethod]
+        public void WhenPlayerMarksAllCellsInSecondColumnThenGameStatusBecomesIsOver()
+        {
+            PlayerMarksAllCellsInSecondColumn();
+
+            Assert.AreEqual(GameStatus.Over, gameUnderTest.Status);
+        }
+
+        [TestMethod]
+        public void WhenPlayerMarksAllCellsInThirdColumnThenGameStatusBecomesIsOver()
+        {
+            PlayerMarksAllCellsInThirdColumn();
+            Assert.AreEqual(GameStatus.Over, gameUnderTest.Status);
+        }
+
+        [TestMethod]
+        public void WhenPlayerMarksAllCellsInTopLeftDiagonalThenGameStatusBecomesIsOver()
+        {
+            PlayerMarksAllCellsInTopLeftDiagonal();
+
+            Assert.AreEqual(GameStatus.Over, gameUnderTest.Status);
+        }
+
+        [TestMethod]
+        public void WhenPlayerMarksAllCelllsInTopRightDiagonalThenGameStatusBecomesIsOver()
+        {
+            PlayerMarksAllCellsInTopRightDiagonal();
+
+            Assert.AreEqual(GameStatus.Over, gameUnderTest.Status);
         }
     }
 }
