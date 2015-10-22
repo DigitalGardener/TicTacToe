@@ -116,6 +116,11 @@ namespace TicTacToe.Domain
         /// <param name="content">New status of cell</param>
         public void Play(CellAddress address, CellContent content)
         {
+            if (Status == GameStatus.Over)
+            {
+                throw new InvalidOperationException("Played cannot be made after game is over");
+            }
+
             if (content != CellContent.X && content != CellContent.O)
             {
                 throw new ArgumentException(nameof(content), $"'{nameof(content)}' '{content}' is invalid");

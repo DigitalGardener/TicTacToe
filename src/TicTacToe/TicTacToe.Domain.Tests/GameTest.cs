@@ -388,5 +388,14 @@ namespace TicTacToe.Domain.Tests
 
             Assert.AreEqual(GameStatus.Over, gameUnderTest.Status);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void WhenAttemptToPlayAfterGameIsOverThenExceptionIsThrown()
+        {
+            PlayerMarksAllCellsInFirstRow();
+
+            gameUnderTest.Play(new CellAddress(1, 1), CellContent.O);
+        }
     }
 }
