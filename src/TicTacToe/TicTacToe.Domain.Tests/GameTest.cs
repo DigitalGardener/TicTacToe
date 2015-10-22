@@ -66,6 +66,80 @@ namespace TicTacToe.Domain.Tests
             firstCellAddress = new CellAddress(CellAddress.MIN_ROW_COLUMN, CellAddress.MIN_ROW_COLUMN);
         }
 
+        #region Helper Methods
+        private void PlayerMarksAllCellsInFirstRow()
+        {
+            gameUnderTest.Play(new CellAddress(0, 0), CellContent.X);
+            gameUnderTest.Play(new CellAddress(1, 0), CellContent.O);
+            gameUnderTest.Play(new CellAddress(0, 1), CellContent.X);
+            gameUnderTest.Play(new CellAddress(2, 0), CellContent.O);
+            gameUnderTest.Play(new CellAddress(0, 2), CellContent.X);
+        }
+
+        private void PlayerMarksAllCellsInSecondRow()
+        {
+            gameUnderTest.Play(new CellAddress(1, 0), CellContent.X);
+            gameUnderTest.Play(new CellAddress(0, 0), CellContent.O);
+            gameUnderTest.Play(new CellAddress(1, 1), CellContent.X);
+            gameUnderTest.Play(new CellAddress(2, 0), CellContent.O);
+            gameUnderTest.Play(new CellAddress(1, 2), CellContent.X);
+        }
+
+        private void PlayerMarksAllCellsInThirdRow()
+        {
+            gameUnderTest.Play(new CellAddress(2, 0), CellContent.X);
+            gameUnderTest.Play(new CellAddress(0, 0), CellContent.O);
+            gameUnderTest.Play(new CellAddress(2, 1), CellContent.X);
+            gameUnderTest.Play(new CellAddress(1, 0), CellContent.O);
+            gameUnderTest.Play(new CellAddress(2, 2), CellContent.X);
+        }
+
+        private void PlayerMarksAllCellsInFirstColumn()
+        {
+            gameUnderTest.Play(new CellAddress(0, 0), CellContent.X);
+            gameUnderTest.Play(new CellAddress(0, 1), CellContent.O);
+            gameUnderTest.Play(new CellAddress(1, 0), CellContent.X);
+            gameUnderTest.Play(new CellAddress(0, 2), CellContent.O);
+            gameUnderTest.Play(new CellAddress(2, 0), CellContent.X);
+        }
+
+        private void PlayerMarksAllCellsInSecondColumn()
+        {
+            gameUnderTest.Play(new CellAddress(0, 1), CellContent.X);
+            gameUnderTest.Play(new CellAddress(0, 0), CellContent.O);
+            gameUnderTest.Play(new CellAddress(1, 1), CellContent.X);
+            gameUnderTest.Play(new CellAddress(0, 2), CellContent.O);
+            gameUnderTest.Play(new CellAddress(2, 1), CellContent.X);
+        }
+
+        private void PlayerMarksAllCellsInThirdColumn()
+        {
+            gameUnderTest.Play(new CellAddress(0, 2), CellContent.X);
+            gameUnderTest.Play(new CellAddress(0, 0), CellContent.O);
+            gameUnderTest.Play(new CellAddress(1, 2), CellContent.X);
+            gameUnderTest.Play(new CellAddress(0, 1), CellContent.O);
+            gameUnderTest.Play(new CellAddress(2, 2), CellContent.X);
+        }
+
+        private void PlayerMarksAllCellsInTopLeftDiagonal()
+        {
+            gameUnderTest.Play(new CellAddress(0, 0), CellContent.X);
+            gameUnderTest.Play(new CellAddress(1, 0), CellContent.O);
+            gameUnderTest.Play(new CellAddress(1, 1), CellContent.X);
+            gameUnderTest.Play(new CellAddress(2, 0), CellContent.O);
+            gameUnderTest.Play(new CellAddress(2, 2), CellContent.X);
+        }
+
+        private void PlayerMarksAllCellsInTopRightDiagonal()
+        {
+            gameUnderTest.Play(new CellAddress(2, 0), CellContent.X);
+            gameUnderTest.Play(new CellAddress(0, 0), CellContent.O);
+            gameUnderTest.Play(new CellAddress(1, 1), CellContent.X);
+            gameUnderTest.Play(new CellAddress(1, 0), CellContent.O);
+            gameUnderTest.Play(new CellAddress(0, 2), CellContent.X);
+        }
+        #endregion
+
         [TestMethod]
         public void AtStartOfGameStatusIsNew()
         {
@@ -127,11 +201,7 @@ namespace TicTacToe.Domain.Tests
         [TestMethod]
         public void WhenPlayerMarksAllCellsInFirstRowGameHasWinner()
         {
-            gameUnderTest.Play(new CellAddress(0, 0), CellContent.X);
-            gameUnderTest.Play(new CellAddress(1, 0), CellContent.O);
-            gameUnderTest.Play(new CellAddress(0, 1), CellContent.X);
-            gameUnderTest.Play(new CellAddress(2, 0), CellContent.O);
-            gameUnderTest.Play(new CellAddress(0, 2), CellContent.X);
+            PlayerMarksAllCellsInFirstRow();
 
             Assert.IsTrue(gameUnderTest.HasWinner);
         }
@@ -139,11 +209,7 @@ namespace TicTacToe.Domain.Tests
         [TestMethod]
         public void WhenPlayerMarksAllCellsInSecondRowGameHasWinner()
         {
-            gameUnderTest.Play(new CellAddress(1, 0), CellContent.X);
-            gameUnderTest.Play(new CellAddress(0, 0), CellContent.O);
-            gameUnderTest.Play(new CellAddress(1, 1), CellContent.X);
-            gameUnderTest.Play(new CellAddress(2, 0), CellContent.O);
-            gameUnderTest.Play(new CellAddress(1, 2), CellContent.X);
+            PlayerMarksAllCellsInSecondRow();
 
             Assert.IsTrue(gameUnderTest.HasWinner);
         }
@@ -151,24 +217,15 @@ namespace TicTacToe.Domain.Tests
         [TestMethod]
         public void WhenPlayerMarksAllCellsInThirdRowGameHasWinner()
         {
-            gameUnderTest.Play(new CellAddress(2, 0), CellContent.X);
-            gameUnderTest.Play(new CellAddress(0, 0), CellContent.O);
-            gameUnderTest.Play(new CellAddress(2, 1), CellContent.X);
-            gameUnderTest.Play(new CellAddress(1, 0), CellContent.O);
-            gameUnderTest.Play(new CellAddress(2, 2), CellContent.X);
+            PlayerMarksAllCellsInThirdRow();
 
             Assert.IsTrue(gameUnderTest.HasWinner);
         }
 
-
         [TestMethod]
         public void WhenPlayerMarksAllCellsInFirstColumnGameHasWinner()
         {
-            gameUnderTest.Play(new CellAddress(0, 0), CellContent.X);
-            gameUnderTest.Play(new CellAddress(0, 1), CellContent.O);
-            gameUnderTest.Play(new CellAddress(1, 0), CellContent.X);
-            gameUnderTest.Play(new CellAddress(0, 2), CellContent.O);
-            gameUnderTest.Play(new CellAddress(2, 0), CellContent.X);
+            PlayerMarksAllCellsInFirstColumn();
 
             Assert.IsTrue(gameUnderTest.HasWinner);
         }
@@ -176,11 +233,7 @@ namespace TicTacToe.Domain.Tests
         [TestMethod]
         public void WhenPlayerMarksAllCellsInSecondColumnGameThenHasWinner()
         {
-            gameUnderTest.Play(new CellAddress(0, 1), CellContent.X);
-            gameUnderTest.Play(new CellAddress(0, 0), CellContent.O);
-            gameUnderTest.Play(new CellAddress(1, 1), CellContent.X);
-            gameUnderTest.Play(new CellAddress(0, 2), CellContent.O);
-            gameUnderTest.Play(new CellAddress(2, 1), CellContent.X);
+            PlayerMarksAllCellsInSecondColumn();
 
             Assert.IsTrue(gameUnderTest.HasWinner);
         }
@@ -188,11 +241,7 @@ namespace TicTacToe.Domain.Tests
         [TestMethod]
         public void WhenPlayerMarksAllCellsInThirdColumnThenGameHasAWinner()
         {
-            gameUnderTest.Play(new CellAddress(0, 2), CellContent.X);
-            gameUnderTest.Play(new CellAddress(0, 0), CellContent.O);
-            gameUnderTest.Play(new CellAddress(1, 2), CellContent.X);
-            gameUnderTest.Play(new CellAddress(0, 1), CellContent.O);
-            gameUnderTest.Play(new CellAddress(2, 2), CellContent.X);
+            PlayerMarksAllCellsInThirdColumn();
 
             Assert.IsTrue(gameUnderTest.HasWinner);
         }
@@ -200,23 +249,15 @@ namespace TicTacToe.Domain.Tests
         [TestMethod]
         public void WhenPlayerMarksAllCellsInTopLeftDiagonalThenGameHasAWinner()
         {
-            gameUnderTest.Play(new CellAddress(0, 0), CellContent.X);
-            gameUnderTest.Play(new CellAddress(1, 0), CellContent.O);
-            gameUnderTest.Play(new CellAddress(1, 1), CellContent.X);
-            gameUnderTest.Play(new CellAddress(2, 0), CellContent.O);
-            gameUnderTest.Play(new CellAddress(2, 2), CellContent.X);
+            PlayerMarksAllCellsInTopLeftDiagonal();
 
             Assert.IsTrue(gameUnderTest.HasWinner);
         }
 
         [TestMethod]
-        public void WhenPlayerMarksAllCellsInBottomLeftDiagonalThenGameHasAWinner()
+        public void WhenPlayerMarksAllCellsInTopRightDiagonalThenGameHasAWinner()
         {
-            gameUnderTest.Play(new CellAddress(2, 0), CellContent.X);
-            gameUnderTest.Play(new CellAddress(0, 0), CellContent.O);
-            gameUnderTest.Play(new CellAddress(1, 1), CellContent.X);
-            gameUnderTest.Play(new CellAddress(1, 0), CellContent.O);
-            gameUnderTest.Play(new CellAddress(0, 2), CellContent.X);
+            PlayerMarksAllCellsInTopRightDiagonal();
 
             Assert.IsTrue(gameUnderTest.HasWinner);
         }
@@ -224,11 +265,7 @@ namespace TicTacToe.Domain.Tests
         [TestMethod]
         public void WhenPlayerMarksAllCellsInFirstRowThenWinningCombinationReturnsTheirAddresses()
         {
-            gameUnderTest.Play(Game.FirstRow[0], CellContent.X);
-            gameUnderTest.Play(new CellAddress(1,0), CellContent.O);
-            gameUnderTest.Play(Game.FirstRow[1], CellContent.X);
-            gameUnderTest.Play(new CellAddress(2,0), CellContent.O);
-            gameUnderTest.Play(Game.FirstRow[2], CellContent.X);
+            PlayerMarksAllCellsInFirstRow();
 
             Assert.IsTrue(Game.FirstRow.All(cellAddress => gameUnderTest.WinningCombination.Contains(cellAddress)));
         }
@@ -236,11 +273,7 @@ namespace TicTacToe.Domain.Tests
         [TestMethod]
         public void WhenPlayerMarksAllCellsInSecondRowThenWinningCombinationReturnsTheirAddresses()
         {
-            gameUnderTest.Play(Game.SecondRow[0], CellContent.X);
-            gameUnderTest.Play(new CellAddress(0,0), CellContent.O);
-            gameUnderTest.Play(Game.SecondRow[1], CellContent.X);
-            gameUnderTest.Play(new CellAddress(2,0), CellContent.O);
-            gameUnderTest.Play(Game.SecondRow[2], CellContent.X);
+            PlayerMarksAllCellsInSecondRow();
 
             Assert.IsTrue(Game.SecondRow.All(cellAddress => gameUnderTest.WinningCombination.Contains(cellAddress)));
 
@@ -249,11 +282,7 @@ namespace TicTacToe.Domain.Tests
         [TestMethod]
         public void WhenPlayerMarksAllCellsInThirdRowThenWinningCombinationReturnsTheirAddresses()
         {
-            gameUnderTest.Play(Game.ThirdRow[0], CellContent.X);
-            gameUnderTest.Play(new CellAddress(0, 0), CellContent.O);
-            gameUnderTest.Play(Game.ThirdRow[1], CellContent.X);
-            gameUnderTest.Play(new CellAddress(1, 0), CellContent.O);
-            gameUnderTest.Play(Game.ThirdRow[2], CellContent.X);
+            PlayerMarksAllCellsInThirdRow();
 
             Assert.IsTrue(Game.ThirdRow.All(cellAddress => gameUnderTest.WinningCombination.Contains(cellAddress)));
 
@@ -262,11 +291,7 @@ namespace TicTacToe.Domain.Tests
         [TestMethod]
         public void WhenPlayerMarksAllCellsInFirstColumnThenWinningCombinationReturnsTheirAddresses()
         {
-            gameUnderTest.Play(Game.FirstColumn[0], CellContent.X);
-            gameUnderTest.Play(new CellAddress(0, 1), CellContent.O);
-            gameUnderTest.Play(Game.FirstColumn[1], CellContent.X);
-            gameUnderTest.Play(new CellAddress(1, 1), CellContent.O);
-            gameUnderTest.Play(Game.FirstColumn[2], CellContent.X);
+            PlayerMarksAllCellsInFirstColumn();
 
             Assert.IsTrue(Game.FirstColumn.All(cellAddress => gameUnderTest.WinningCombination.Contains(cellAddress)));
 
@@ -275,11 +300,7 @@ namespace TicTacToe.Domain.Tests
         [TestMethod]
         public void WhenPlayerMarksAllCellsInSecondColumnThenWinningCombinationReturnsTheirAddresses()
         {
-            gameUnderTest.Play(Game.SecondColumn[0], CellContent.X);
-            gameUnderTest.Play(new CellAddress(0, 0), CellContent.O);
-            gameUnderTest.Play(Game.SecondColumn[1], CellContent.X);
-            gameUnderTest.Play(new CellAddress(1, 0), CellContent.O);
-            gameUnderTest.Play(Game.SecondColumn[2], CellContent.X);
+            PlayerMarksAllCellsInSecondColumn();
 
             Assert.IsTrue(Game.SecondColumn.All(cellAddress => gameUnderTest.WinningCombination.Contains(cellAddress)));
         }
@@ -287,11 +308,7 @@ namespace TicTacToe.Domain.Tests
         [TestMethod]
         public void WhenPlayerMarksAllCellsInThirdColumnThenWinningCombinationReturnsTheirAddresses()
         {
-            gameUnderTest.Play(Game.ThirdColumn[0], CellContent.X);
-            gameUnderTest.Play(new CellAddress(0, 0), CellContent.O);
-            gameUnderTest.Play(Game.ThirdColumn[1], CellContent.X);
-            gameUnderTest.Play(new CellAddress(1, 0), CellContent.O);
-            gameUnderTest.Play(Game.ThirdColumn[2], CellContent.X);
+            PlayerMarksAllCellsInThirdColumn();
 
             Assert.IsTrue(Game.ThirdColumn.All(cellAddress => gameUnderTest.WinningCombination.Contains(cellAddress)));
         }
@@ -299,11 +316,7 @@ namespace TicTacToe.Domain.Tests
         [TestMethod]
         public void WhenPlayerMarksAllCellsInTopLeftDiagonalThenWinningCombinationReturnsTheirAddresses()
         {
-            gameUnderTest.Play(Game.TopLeftDiagonal[0], CellContent.X);
-            gameUnderTest.Play(new CellAddress(1, 0), CellContent.O);
-            gameUnderTest.Play(Game.TopLeftDiagonal[1], CellContent.X);
-            gameUnderTest.Play(new CellAddress(2, 0), CellContent.O);
-            gameUnderTest.Play(Game.TopLeftDiagonal[2], CellContent.X);
+            PlayerMarksAllCellsInTopLeftDiagonal();
 
             Assert.IsTrue(Game.TopLeftDiagonal.All(cellAddress => gameUnderTest.WinningCombination.Contains(cellAddress)));
         }
@@ -311,11 +324,7 @@ namespace TicTacToe.Domain.Tests
         [TestMethod]
         public void WhenPlayerMarksAllCellsInTopRightDiagonalThenWinningCombinationReturnsTheirAddresses()
         {
-            gameUnderTest.Play(Game.TopRightDiagonal[0], CellContent.X);
-            gameUnderTest.Play(new CellAddress(0, 0), CellContent.O);
-            gameUnderTest.Play(Game.TopRightDiagonal[1], CellContent.X);
-            gameUnderTest.Play(new CellAddress(1, 0), CellContent.O);
-            gameUnderTest.Play(Game.TopRightDiagonal[2], CellContent.X);
+            PlayerMarksAllCellsInTopRightDiagonal();
 
             Assert.IsTrue(Game.TopRightDiagonal.All(cellAddress => gameUnderTest.WinningCombination.Contains(cellAddress)));
         }
