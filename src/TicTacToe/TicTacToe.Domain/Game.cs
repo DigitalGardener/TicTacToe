@@ -14,7 +14,7 @@ namespace TicTacToe.Domain
         private void SetCellContent(CellAddress address, CellContent content) => _rawCells[address.Row, address.Column] = content;
  
         /// <summary>
-        /// Contents of all cells in particular order
+        /// Contents of all cells in no particular order
         /// </summary>
         public IEnumerable<CellContent> CellsContent => _rawCells.Cast<CellContent>();
 
