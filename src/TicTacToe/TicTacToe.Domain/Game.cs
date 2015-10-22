@@ -125,11 +125,11 @@ namespace TicTacToe.Domain
         }
 
         /// <summary>
-        /// Sets the status of a cell
+        /// Sets the content of a cell
         /// </summary>
         /// <param name="row">Row number of cell</param>
         /// <param name="column">Column number of cell</param>
-        /// <param name="content">New status of cell</param>
+        /// <param name="content">New content of cell</param>
         public void Play(CellAddress address, CellContent content)
         {
             if (Status == GameStatus.Over)
